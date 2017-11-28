@@ -1,10 +1,9 @@
-console.log(today);
-const weatherAlert = {
+const weatherApp = {
 
 		onReady: function() {
 			const zipCode = 97266;
-			weatherAlert.callWeather(zipCode);
-			weatherAlert.callForecast(zipCode);
+			weatherApp.callWeather(zipCode);
+			weatherApp.callForecast(zipCode);
 		},
 
 		callWeather: function(zip) {
@@ -13,7 +12,7 @@ const weatherAlert = {
 				dataType: 'json',
 				url: currentWeatherURL
 			}).done(function(data) {
-				weatherAlert.gatherWeather(data);
+				weatherApp.gatherWeather(data);
 			}).fail(function(jqXHR, textStatus, errorThrown) {
 				console.log(textStatus + ": " + errorThrown);
 			});
@@ -25,7 +24,7 @@ const weatherAlert = {
 			const mainWeather = json.weather[0].main;
 			const weatherDescription = json.weather[0].description;
 			const temperature = json.main.temp;
-			weatherAlert.populateDOM(weatherIcon, cityName, mainWeather, weatherDescription, temperature);
+			weatherApp.populateDOM(weatherIcon, cityName, mainWeather, weatherDescription, temperature);
 		},
 
 		callForecast: function(zip) {
@@ -34,11 +33,15 @@ const weatherAlert = {
 				dataType: 'json',
 				url: fiveDayURL
 			}).done(function(data) {
-				console.log(data);
-
+				weatherApp.findTomorrowIndex(data);
 			}).fail(function(jqXHR, textStatus, errorThrown) {
 				console.log(textStatus + ": " + errorThrown);
 			});
+		},
+
+		findTomorrowIndex: function(forecastData) {
+			console.log(forecastData);
+			console.log(today);
 		},
 
 		populateDOM: function(icon, city, weather, description, temp) {
@@ -53,4 +56,4 @@ const weatherAlert = {
 		}
 	}
 
-	$(document).ready(weatherAlert.onReady);
+	$(document).ready(weatherApp.onReady);
