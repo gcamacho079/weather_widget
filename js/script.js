@@ -12,7 +12,8 @@ const weatherApp = {
 				dataType: 'json',
 				url: currentWeatherURL
 			}).done(function(data) {
-				weatherApp.gatherWeather(data);
+				weatherApp.gatherWeather(data); // Sends data to fxn for processing
+				weatherApp.getTimeZone(data.coord.lat, data.coord.lon); // Runs thru Google API call to find out timezone
 			}).fail(function(jqXHR, textStatus, errorThrown) {
 				console.log(textStatus + ": " + errorThrown);
 			});
@@ -33,15 +34,27 @@ const weatherApp = {
 				dataType: 'json',
 				url: fiveDayURL
 			}).done(function(data) {
-				weatherApp.findTomorrowIndex(data);
+				weatherApp.startingTomorrow(data.list);
 			}).fail(function(jqXHR, textStatus, errorThrown) {
 				console.log(textStatus + ": " + errorThrown);
 			});
 		},
 
-		findTomorrowIndex: function(forecastData) {
-			console.log(forecastData);
-			console.log(today);
+		startingTomorrow: function(forecast) {
+			console.log("This works");
+		},
+
+		getTimeZone: function(x, y) {
+			console.log("Get time");
+			googleURL = "https://maps.googleapis.com/maps/api/timezone/json?location=" + x + "," + y  + "&timestamp=1331161200&key=AIzaSyDtazfalnTvCqfFtLfg5hquBhQRwyQhBys"
+			$.ajax({
+				dataType: 'json',
+				url: googleURL
+			}).done(function(data) {
+				console.log(data);
+			}).fail(function(jqXHR, textStatus, errorThrown) {
+				console.log(textStatus + ": " + errorThrown);
+			});
 		},
 
 		populateDOM: function(icon, city, weather, description, temp) {
