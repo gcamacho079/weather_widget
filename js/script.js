@@ -1,3 +1,4 @@
+console.log(today);
 const weatherAlert = {
 
 		onReady: function() {
@@ -34,6 +35,7 @@ const weatherAlert = {
 				url: fiveDayURL
 			}).done(function(data) {
 				console.log(data);
+
 			}).fail(function(jqXHR, textStatus, errorThrown) {
 				console.log(textStatus + ": " + errorThrown);
 			});

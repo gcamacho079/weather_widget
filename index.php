@@ -10,6 +10,7 @@
 
 </head>
 <body>
+
   <div class="container">
     <div class="weather-box well">
 	     <img src="" alt="" id="wb__icon">
@@ -26,6 +27,10 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.12.0/d3.js"></script>
+  <script>
+  const today = '<?php echo date("Y-m-d");?>';
+
+  </script>
   <script src="js/script.js"></script>
 </body>
 </html>
