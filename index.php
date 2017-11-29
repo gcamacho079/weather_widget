@@ -12,24 +12,15 @@
 <body>
 
   <div class="container">
-    <div class="weather-box well">
-	     <img src="" alt="" id="wb__icon">
-       <strong>
-         <p id="wb__temp"></p>
-       </strong>
-       <p>The weather in
-         <span id="wb__city"></span> is <span id="wb__desc"></span>
-       </p>
-	</div>
 
-  <table class="table">
-    <tr>
-      <th>Day</th>
-      <th>Low/High</th>
-      <th>Weather</th>
-    </tr>
-  </table>
+    <div class="table-responsive">
+      <table class="table">
+        <tr id="forecast__days">
+          <!--Insert Days from API Call-->
+        </tr>
+      </table>
 
+    </div>
   </div>
 
 

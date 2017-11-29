@@ -12,15 +12,29 @@ const weatherApp = {
 				url: wundergroundURL
 			}).done(function(data) {
 				console.log(data);
-				weatherApp.createDataArray(data.forecast.simpleforecast.forecastday);
+				weatherApp.createDataArrays(data.forecast.simpleforecast.forecastday);
 			}).fail(function(jqXHR, textStatus, errorThrown) {
 				console.log(textStatus + ": " + errorThrown);
 			});
 		},
 
-		createDataArray: function(json) {
+		createDataArrays: function(json) {
 			const lengthOfForecast = 5;
 			console.log(json);
+			let forecastDays = [];
+			let date = "";
+			for (i = 0; i < lengthOfForecast; i++) {
+				date = json[i].date.weekday_short + " " + json[i].date.month + "/" + json[i].date.day;
+				forecastDays.push(date);
+			}
+			weatherApp.buildForecastTable(forecastDays);
+			console.log(forecastDays);
+		},
+
+		buildForecastTable: function(tableHeader) {
+			tableHeader.forEach(function(element) {
+				$("#forecast__days").append("<th>" + element + "</th>");
+			});
 		}
 	}
 
