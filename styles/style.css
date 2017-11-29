@@ -1,0 +1,13 @@
+#forecast-table>tbody>tr>td,
+#forecast-table>tbody>tr>th,
+#forecast-table>tfoot>tr>td,
+#forecast-table>tfoot>tr>th,
+#forecast-table>thead>tr>td,
+#forecast-table>thead>tr>th {
+  border-top: none;
+}
+
+#forecast-table tr,
+#forecast-table th {
+  text-align: center;
+}
