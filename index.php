@@ -22,6 +22,14 @@
        </p>
 	</div>
 
+  <table class="table">
+    <tr>
+      <th>Day</th>
+      <th>Low/High</th>
+      <th>Weather</th>
+    </tr>
+  </table>
+
   </div>
 
 
