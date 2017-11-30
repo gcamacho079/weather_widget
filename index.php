@@ -28,15 +28,17 @@
       </table>
 
     </div>
+
+    <div class="alert alert-danger advisory-box" role="alert">
+      <h4>Current Weather Advisories</h4>
+      <div id="advisory-messages">
+      </div>
+    </div>
   </div>
 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.12.0/d3.js"></script>
-  <script>
-  var today = '<?php echo date("Y-m-d H:i:s");?>';
-
-  </script>
   <script src="js/script.js"></script>
 </body>
 </html>
