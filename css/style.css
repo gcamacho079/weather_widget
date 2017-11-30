@@ -5,6 +5,7 @@
 #forecast-table>thead>tr>td,
 #forecast-table>thead>tr>th {
   border-top: none;
+  padding: 4px;
 }
 
 #forecast-table tr,
@@ -14,4 +15,32 @@
 
 .advisory-box {
   display: none;
+}
+
+/**********
+ Icons
+ **********/
+
+.raindrop-icon {
+  color: #7dc9e2;
+}
+
+.leaf-icon {
+  color: #a7e37d;
+}
+/**********
+ Temperatures
+ **********/
+
+.high-temp {
+  color: red;
+}
+
+.low-temp {
+  color: #0085ff;
+}
+
+.low-temp,
+.high-temp {
+  font-weight: 700;
 }
