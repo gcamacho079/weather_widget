@@ -26,7 +26,6 @@ const weatherApp = {
 			dataType: 'json',
 			url: "http://api.wunderground.com/api/ab855c8f628983eb/forecast10day/q/" + latlong + ".json"
 		}).done(function(data) {
-			console.log(data);
 			weatherApp.createForecastArrays(data.forecast.simpleforecast.forecastday);
 		}).fail(function(jqXHR, textStatus, errorThrown) {
 			console.log(textStatus + ": " + errorThrown);

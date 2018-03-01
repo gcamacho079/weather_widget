@@ -14,7 +14,6 @@
 <body>
 
   <div class="container forecast-container">
-    <h3 class="forecast-container__heading">Weather Forecast for </h3>
     <div class="table-responsive">
       <table class="table" id="forecast-table">
         <tr id="forecast__days">
