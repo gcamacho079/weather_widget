@@ -1,0 +1,37 @@
+#forecast-table > tbody > tr > td,
+#forecast-table > tbody > tr > th,
+#forecast-table > tfoot > tr > td,
+#forecast-table > tfoot > tr > th,
+#forecast-table > thead > tr > td,
+#forecast-table > thead > tr > th {
+  border-top: none;
+  padding: 4px; }
+
+#forecast-table tr,
+#forecast-table th {
+  text-align: center; }
+
+.advisory-box {
+  display: none; }
+
+/**********
+ Icons
+ **********/
+.raindrop-icon {
+  color: #7dc9e2; }
+
+.leaf-icon {
+  color: #a7e37d; }
+
+/**********
+ Temperatures
+ **********/
+.high-temp {
+  color: red; }
+
+.low-temp {
+  color: #0085ff; }
+
+.low-temp,
+.high-temp {
+  font-weight: 700; }

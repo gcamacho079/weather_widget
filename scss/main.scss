@@ -1,3 +1,7 @@
+@mixin hidden {
+  display: none;
+}
+
 #forecast-table>tbody>tr>td,
 #forecast-table>tbody>tr>th,
 #forecast-table>tfoot>tr>td,
@@ -6,6 +10,7 @@
 #forecast-table>thead>tr>th {
   border-top: none;
   padding: 4px;
+
 }
 
 #forecast-table tr,
@@ -14,7 +19,7 @@
 }
 
 .advisory-box {
-  display: none;
+  @include hidden;
 }
 
 /**********
