@@ -13,7 +13,7 @@ gulp.task('styles', function() {
 });
 
 gulp.task('scripts', function() {
-  gulp.src('./src/script.js')
+  gulp.src('./src/*.js')
     .pipe(babel({
       presets: ['env']
     }))
@@ -29,7 +29,7 @@ gulp.task('serve', function() {
   });
 
   gulp.watch('./scss/*.scss', ['styles']);
-  gulp.watch('./js/*.js', ['scripts']);
+  gulp.watch('./src/*.js', ['scripts']);
   gulp.watch('./**/*.html').on('change', browserSync.reload);
 });
 

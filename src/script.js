@@ -1,22 +1,27 @@
 const weatherApp = {
 
-	onReady: function() {
+	init: function() {
 		weatherApp.findLocation();
 	},
 
-	/*********
-	API CALLS
-	*********/
+	/**** API CALLS ***********************************/
+
+	apiCall: (url, requestType) => {
+		return $.ajax({
+			dataType: 'JSON',
+			type: requestType,
+			url: url
+		});
+	},
 
 	findLocation: function() {
-		$.ajax ({
-			dataType: 'json',
-			type: 'POST',
-			url: "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyBQOajYnXKHb3V49oeaD2o4oeRiWuXV0uc"
-		}).done(function(data) {
+		const geolocationEndpoint= "https://www.googleapis.com/geolocation/v1/geolocate?key=" + config.GOOGLE_KEY;
+		var locationPromise = weatherApp.apiCall(geolocationEndpoint, "POST");
+
+		$.when(locationPromise).done(function(data) {
 			weatherApp.getWeatherInfo(data.location.lat + "," + data.location.lng);
 		}).fail(function(jqXHR, textStatus, errorThrown) {
-			console.log(textStatus + ": " + errorThrown);
+			console.log("now we call the error function");
 		});
 	},
 
@@ -24,7 +29,7 @@ const weatherApp = {
 		// Wunderground Forecast
 		$.ajax ({
 			dataType: 'json',
-			url: "http://api.wunderground.com/api/ab855c8f628983eb/forecast10day/q/" + latlong + ".json"
+			url: "http://api.wunderground.com/api/" + config.WUNDERGROUND_KEY + "/forecast10day/q/" + latlong + ".json"
 		}).done(function(data) {
 			weatherApp.createForecastArrays(data.forecast.simpleforecast.forecastday);
 		}).fail(function(jqXHR, textStatus, errorThrown) {
@@ -55,7 +60,7 @@ const weatherApp = {
 		let conditions = [];
 		let rain = [];
 		let wind = [];
-		for (i = 0; i < 5; i++) { // Days in forecast
+		for (var i = 0; i < 5; i++) { // Days in forecast
 			forecastDays.push(json[i].date.weekday_short + " " + json[i].date.month + "/" + json[i].date.day);
 			highLow.push("<span class='low-temp'>" + json[i].low.fahrenheit + "\xB0</span> | <span class='high-temp'>" + json[i].high.fahrenheit + "\xB0</span>");
 			weatherIcon.push([json[i].icon_url, json[i].icon]);
@@ -108,4 +113,4 @@ const weatherApp = {
 	}
 }
 
-$(document).ready(weatherApp.onReady);
+$(document).ready(weatherApp.init);
