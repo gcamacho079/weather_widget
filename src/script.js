@@ -4,8 +4,6 @@ const weatherApp = {
 		weatherApp.findLocation();
 	},
 
-	/**** API CALLS ***********************************/
-
 	apiCall: (url, requestType) => {
 		return $.ajax({
 			dataType: 'JSON',
@@ -15,8 +13,10 @@ const weatherApp = {
 	},
 
 	findLocation: function() {
-		const geolocationEndpoint= "https://www.googleapis.com/geolocation/v1/geolocate?key=" + config.GOOGLE_KEY;
-		var locationPromise = weatherApp.apiCall(geolocationEndpoint, "POST");
+		var locationPromise = weatherApp.apiCall(
+			"https://www.googleapis.com/geolocation/v1/geolocate?key=" + config.GOOGLE_KEY,
+			"POST"
+		);
 
 		$.when(locationPromise).done(function(data) {
 			weatherApp.getWeatherInfo(data.location.lat + "," + data.location.lng);
@@ -26,23 +26,22 @@ const weatherApp = {
 	},
 
  	getWeatherInfo: function(latlong) {
-		// Wunderground Forecast
-		$.ajax ({
-			dataType: 'json',
-			url: "http://api.wunderground.com/api/" + config.WUNDERGROUND_KEY + "/forecast10day/q/" + latlong + ".json"
-		}).done(function(data) {
-			weatherApp.createForecastArrays(data.forecast.simpleforecast.forecastday);
-		}).fail(function(jqXHR, textStatus, errorThrown) {
-			console.log(textStatus + ": " + errorThrown);
-		});
+		var weatherPromise = weatherApp.apiCall(
+			weatherEndpoint = "http://api.wunderground.com/api/" + config.WUNDERGROUND_KEY + "/forecast10day/q/" + latlong + ".json",
+			"GET"
+		);
+		var advisoryPromise = weatherApp.apiCall(
+			"http://api.wunderground.com/api/" + config.WUNDERGROUND_KEY + "/alerts/q/" + latlong + ".json",
+			"GET"
+		);
 
-		// Wunderground Advisories
-		$.ajax ({
-			dataType: 'json',
-			url: "http://api.wunderground.com/api/ab855c8f628983eb/alerts/q/" + latlong + ".json"
-		}).done(function(data) {
-			if (data.alerts.length !== 0) { //Remove ! to test formatting of alert
-				weatherApp.processAlerts(data.alerts);
+		$.when(
+			weatherPromise,
+			advisoryPromise
+		).done(function(forecast, advisories) {
+			weatherApp.createForecastArrays(forecast[0].forecast.simpleforecast.forecastday);
+			if (advisories[0].alerts.length !== 0) {
+				weatherApp.processAlerts(advisories.alerts);
 			}
 		}).fail(function(jqXHR, textStatus, errorThrown) {
 			console.log(textStatus + ": " + errorThrown);
