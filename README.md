@@ -6,7 +6,9 @@ This weather widget uses the Weather Underground and Google Geolocation APIs to 
 
 ## Configuration
 
-To configure with your own API keys, place a file config.js inside the dist folder.
+To configure with your own API keys, place a file called config.js inside the dist folder.
+
+Then, include the following code:
 
 ```javascript
 var config = {
