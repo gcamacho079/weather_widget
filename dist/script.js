@@ -20,7 +20,8 @@ var weatherModel = {
 		$.when(locationPromise).done(function (data) {
 			weatherModel.getWeatherInfo(data.location.lat + "," + data.location.lng);
 		}).fail(function (jqXHR, textStatus, errorThrown) {
-			console.log("now we call the error function");
+			console.log(textStatus + ": " + errorThrown);
+			weatherController.handleError("googleLocation", "Sorry, there was an error finding your location. Please contact a site administrator.");
 		});
 	},
 
@@ -35,6 +36,7 @@ var weatherModel = {
 			}
 		}).fail(function (jqXHR, textStatus, errorThrown) {
 			console.log(textStatus + ": " + errorThrown);
+			weatherController.handleError("weather", "Sorry, there was an error obtaining your forecast. Please contact a site administrator.");
 		});
 	}
 
@@ -67,6 +69,10 @@ var weatherModel = {
 			allAlerts.push([thisAlert.description, thisAlert.message, thisAlert.expires]);
 		});
 		weatherView.buildAlertBox(allAlerts);
+	},
+
+	handleError: function handleError(errorType, errorMessage) {
+		weatherView.showErrorMessage(errorType, errorMessage);
 	}
 
 	/*****
@@ -85,13 +91,16 @@ var weatherModel = {
 	},
 
 	buildAlertBox: function buildAlertBox(alerts) {
-		$(".advisory-box").toggle();
+		$(".forecast-container").append("<div class='alert alert-danger advisory-box' role='alert'> <h4>Current Weather Advisories</h4> <div id='advisory-messages'> </div> </div>");
 		alerts.forEach(function (element) {
 			$("#advisory-messages").append("<p><strong>" + element[0] + "</strong>: " + element[1] + "<br><small>(Expires on " + element[2] + "</small>)</p>");
 		});
 	},
 
-	showErrorMessage: function showErrorMessage(typeOfError, message) {}
+	showErrorMessage: function showErrorMessage(typeOfError, message) {
+		$("#forecast-table").hide();
+		$(".forecast-container").append("<p>" + message + "</p>");
+	}
 };
 
 $(document).ready(weatherModel.init);
