@@ -18,8 +18,9 @@
   text-align: center;
 }
 
-.advisory-box {
-  @include hidden;
+.loader-div {
+	text-align: center;
+	font-weight: 700;
 }
 
 /**********

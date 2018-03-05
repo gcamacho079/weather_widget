@@ -11,6 +11,10 @@
 #forecast-table th {
   text-align: center; }
 
+.loader-div {
+  text-align: center;
+  font-weight: 700; }
+
 /**********
  Icons
  **********/

@@ -80,6 +80,8 @@ var weatherModel = {
 
 };var weatherView = {
 	buildForecastTable: function buildForecastTable(forecastDays, highLow, weatherIcon, conditions, rain, wind) {
+		$(".loader-div").hide();
+
 		forecastDays.forEach(function (element, index) {
 			$("#forecast__days").append("<th>" + element + "</th>");
 			$("#forecast__temps").append("<td>" + highLow[index] + "</td>");
@@ -98,6 +100,7 @@ var weatherModel = {
 	},
 
 	showErrorMessage: function showErrorMessage(typeOfError, message) {
+		$(".loader-div").hide();
 		$("#forecast-table").hide();
 		$(".forecast-container").append("<p>" + message + "</p>");
 	}

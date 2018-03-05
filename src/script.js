@@ -92,6 +92,8 @@ const weatherController = {
 
 const weatherView = {
 	buildForecastTable: function(forecastDays, highLow, weatherIcon, conditions, rain, wind) {
+		$(".loader-div").hide();
+
 		forecastDays.forEach(function(element, index) {
 			$("#forecast__days").append("<th>" + element + "</th>");
 			$("#forecast__temps").append("<td>" + highLow[index] + "</td>");
@@ -110,6 +112,7 @@ const weatherView = {
 	},
 
 	showErrorMessage: function(typeOfError, message) {
+		$(".loader-div").hide();
 		$("#forecast-table").hide();
 		$(".forecast-container").append("<p>" + message + "</p>");
 	}
